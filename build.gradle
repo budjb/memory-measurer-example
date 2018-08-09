@@ -1,0 +1,22 @@
+apply plugin: 'java'
+apply plugin: 'application'
+
+group = 'com.budjb.example'
+version = '0.0.1'
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    maven { url 'https://jitpack.io' }
+}
+
+
+dependencies {
+    compile 'com.google.guava:guava:26.0-jre'
+    compile 'com.github.methodho:memory-measurer:master'
+}
+
+run {
+    mainClassName = 'com.budjb.example.Application'
+    jvmArgs = ["-javaagent:${project.configurations.compile.find { it.name.startsWith("memory-measurer") }}"]
+}
